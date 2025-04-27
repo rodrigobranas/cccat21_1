@@ -9,6 +9,8 @@ app.use(express.json());
 // const accounts: any = [];
 const connection = pgp()("postgres://postgres:123456@localhost:5432/app");
 
+console.log("Rodando signup controller")
+
 function isValidName (name: string) {
     return name.match(/[a-zA-Z] [a-zA-Z]+/);
 }
@@ -68,5 +70,6 @@ app.get("/accounts/:accountId", async (req: Request, res: Response) => {
     const [accountData] = await connection.query("select * from ccca.account where account_id = $1", [accountId]);
     res.json(accountData);
 });
+
 
 app.listen(3000);
